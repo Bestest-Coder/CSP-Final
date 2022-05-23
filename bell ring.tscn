@@ -1,0 +1,145 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Libertinage.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://bell ring.gd" type="Script" id=2]
+[ext_resource path="res://hammer.png" type="Texture" id=3]
+[ext_resource path="res://Hammer.gd" type="Script" id=4]
+[ext_resource path="res://bell.png" type="Texture" id=5]
+[ext_resource path="res://Bell.gd" type="Script" id=6]
+[ext_resource path="res://Boxing Bell Start Round-SoundBible.com-1691615580.wav" type="AudioStream" id=7]
+[ext_resource path="res://Restart Button.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 1 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0 )
+colors = PoolColorArray( 1, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 50
+font_data = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2( 1.87271, 1.80929 )
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1025.0
+margin_bottom = 596.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 2.0
+margin_right = 1025.0
+margin_bottom = 119.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "HIT SPACEBAR AS FAST AS YOU CAN
+ TO HIT THE BELL"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_left = 898.309
+margin_top = 575.573
+margin_right = 2946.31
+margin_bottom = 576.573
+rect_rotation = -89.9999
+rect_scale = Vector2( 0.222596, 61.7015 )
+texture_under = SubResource( 3 )
+texture_progress = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TimerText" type="Label" parent="."]
+visible = false
+margin_left = 773.211
+margin_top = 75.1676
+margin_right = 1006.21
+margin_bottom = 192.168
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Time left: 5
+"
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Hammer" type="TextureRect" parent="."]
+margin_left = 347.64
+margin_top = 187.956
+margin_right = 593.641
+margin_bottom = 536.956
+rect_scale = Vector2( 0.516414, 0.516414 )
+rect_pivot_offset = Vector2( 123, 349 )
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[node name="Bell" type="TextureRect" parent="."]
+margin_left = 641.851
+margin_top = 110.541
+margin_right = 805.851
+margin_bottom = 678.541
+rect_scale = Vector2( 0.822023, 0.822023 )
+texture = ExtResource( 5 )
+script = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="Bell"]
+margin_left = 75.3535
+margin_top = 543.274
+margin_right = 115.353
+margin_bottom = 583.274
+rect_scale = Vector2( 0.828332, 0.51675 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="BellRailTop" type="Position2D" parent="Bell"]
+position = Vector2( 79.2511, 99.5106 )
+scale = Vector2( 0.828332, 0.51675 )
+
+[node name="BellTween" type="Tween" parent="Bell"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Bell"]
+stream = ExtResource( 7 )
+volume_db = -20.101
+
+[node name="Restart Button" type="Button" parent="."]
+visible = false
+margin_left = 149.516
+margin_top = 239.873
+margin_right = 212.516
+margin_bottom = 259.873
+rect_scale = Vector2( 2.53246, 2.53246 )
+text = "Restart?"
+script = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="Restart Button"]
+margin_left = 0.84343
+margin_top = 24.4438
+margin_right = 40.8434
+margin_bottom = 38.4438
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Escape to quit"
+
+[connection signal="finished" from="." to="Hammer" method="_on_Node2D_finished"]
+[connection signal="finished" from="." to="Bell" method="_on_Node2D_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="tween_completed" from="Tween" to="Hammer" method="_on_Tween_tween_completed"]
+[connection signal="pressed" from="Restart Button" to="Restart Button" method="_on_Restart_Button_pressed"]

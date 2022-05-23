@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Libertinage.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://circus.jpg" type="Texture" id=2]
+[ext_resource path="res://title.gd" type="Script" id=3]
+[ext_resource path="res://bell ring.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 140
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 45
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+nextScene = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 2 )
+stretch_mode = 1
+
+[node name="Label" type="Label" parent="."]
+margin_top = 4.0
+margin_right = 1920.0
+margin_bottom = 304.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "IT'S CARNIVAL TIME"
+align = 1
+
+[node name="Button" type="Button" parent="."]
+margin_left = 632.0
+margin_top = 665.0
+margin_right = 863.0
+margin_bottom = 723.0
+rect_scale = Vector2( 3.20416, 3.20416 )
+custom_fonts/font = SubResource( 2 )
+text = "LETS DO IT"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
